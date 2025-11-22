@@ -20,6 +20,12 @@ namespace Assets.ParadoxShift.Scripts.Player
         [Header("Gravity")]
         [SerializeField] private float _fallMultiplier = 2.5f;
         [SerializeField] private float _lowJumpMultiplier = 2f;
+        [Header("Jump Feel")]
+        [SerializeField] private float _coyoteTime = 0.2f;
+        [SerializeField] private float _jumpBufferTime = 0.2f;
+        private float _coyoteTimeCounter;
+        private float _jumpBufferCounter;
+
         private Rigidbody2D _rb;
         
         private void Start()
@@ -39,14 +45,33 @@ namespace Assets.ParadoxShift.Scripts.Player
             };
             
         }
+        private void Update()
+        {
+            if (_isGrounded)
+            {
+                _coyoteTimeCounter = _coyoteTime;
+            }
+            else
+            {
+                _coyoteTimeCounter -= Time.deltaTime;
+            }
+            _jumpBufferCounter -= Time.deltaTime;
 
+        }
         private void FixedUpdate()
         {
-            _rb.linearVelocity = new Vector2(_inputReader.Direction.x * _moveSpeed, _rb.linearVelocityY);
+            _rb.linearVelocity = new Vector2(_inputReader.Direction.x * _moveSpeed, _rb.linearVelocity.y);
             CheckGround();
-            TryJump();
             HandleGravity();
+
+            if (_coyoteTimeCounter > 0f && _jumpBufferCounter > 0f)
+            {
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _jumpForce);
+                _jumpBufferCounter = 0f;
+                _coyoteTimeCounter = 0f;
+            }
         }
+
         private void HandleGravity()
         {
             // Si el jugador esta cayendo
@@ -67,12 +92,18 @@ namespace Assets.ParadoxShift.Scripts.Player
         }
         private void Land()
         {
+             _jumpBufferCounter -= Time.deltaTime;
         }
 
         private void Jump()
         {
+            _jumpBufferCounter = _jumpBufferTime;
             if (_isGrounded)
+            {
                 _isJumping = true;
+            }
+            
+
         }
         private void TryJump()
         {
