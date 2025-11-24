@@ -129,6 +129,8 @@ GameObject:
   m_Component:
   - component: {fileID: 478407666}
   - component: {fileID: 478407665}
+  - component: {fileID: 478407669}
+  - component: {fileID: 478407670}
   - component: {fileID: 478407668}
   - component: {fileID: 478407667}
   m_Layer: 0
@@ -252,6 +254,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &478407669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478407664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f79d6ee629761439225478b599d9d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.ParadoxShift.Scripts.Rewind.TimeRecorder
+  recordTime: 5
+--- !u!114 &478407670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478407664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8df9c923987e6943bfe995943198dec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.ParadoxShift.Scripts.Rewind.RewindManager
+  _inputReader: {fileID: 11400000, guid: e755205e3f78f7f43a9d087d98d0b03b, type: 2}
+  isRewinding: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,9 +15,11 @@ namespace Assets.ParadoxShift.Scripts.Input
     {
         public event UnityAction<Vector2> Move = delegate { };
         public event UnityAction<bool> Jump = delegate { };
+        public event UnityAction<bool> Reward = delegate { };
         public InputSystem_Actions inputActions;
         public Vector2 Direction => inputActions.Player.Move.ReadValue<Vector2>();
         public bool IsJumpHeld => inputActions.Player.Jump.IsPressed();
+        public bool IsReward => inputActions.Player.Reward.IsPressed();
 
         public void EnablePlayerAction()
         {
@@ -73,6 +75,10 @@ namespace Assets.ParadoxShift.Scripts.Input
         }
 
         public void OnSprint(InputAction.CallbackContext context)
+        {
+        }
+
+        public void OnReward(InputAction.CallbackContext context)
         {
         }
     }
